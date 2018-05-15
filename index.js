@@ -73,7 +73,7 @@ function zelda (rootPath, opts) {
   }
 
   function npmInstall (pkgPath) {
-    console.log(`[zelda] cd ' + pkgPath + ' && rm node_modules/ && ${PKG_MGR_EXEC} install`)
+    console.log(`[zelda] cd ' + pkgPath + ' && ${PKG_MGR_EXEC} install`)
 
     var args = ['install']
     if (opts.production) args.push('--production')
