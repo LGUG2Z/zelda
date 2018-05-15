@@ -79,7 +79,6 @@ function zelda (rootPath, opts) {
     if (opts.production) args.push('--production')
 
     if (!opts['dry-run']) {
-      rimraf.sync(path.join(pkgPath, 'node_modules'))
       cp.spawnSync(PKG_MGR_EXEC, args, {
         cwd: pkgPath,
         stdio: 'inherit'
