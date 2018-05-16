@@ -77,6 +77,9 @@ function zelda (rootPath, opts) {
 
     var args = ['install']
     if (opts.production) args.push('--production')
+    if (opts.yarn) args.push('--ignore-engines')
+    if (opts.yarn) args.push('--ignore-optional')
+    if (opts.yarn) args.push('--silent')
 
     if (!opts['dry-run']) {
       cp.spawnSync(PKG_MGR_EXEC, args, {
