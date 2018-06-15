@@ -39,7 +39,6 @@ function zelda (rootPath, opts) {
 
   // get packages in code folder
   var codePkgs = getCodePkgs(codePath)
-
   if (opts.install) npmInstall(rootPath)
 
   var pkgsToPurge = {}
@@ -63,9 +62,16 @@ function zelda (rootPath, opts) {
 
     var pkgPath = path.join(codePath, pkgToPurge)
     traverseNodeModules(pkgPath, function (pkgName, pkgPath) {
-      if (pkgsToPurge[pkgName]) rmDir(pkgPath)
+      if (pkgsToPurge[pkgName] && referencesGitHub(pkgName, pkgPath)) {
+        rmDir(pkgPath)
+      }
     })
   })
+
+  function referencesGitHub(name, pkgPath) {
+    const pkgJson = require(`${path.resolve(pkgPath, '../../')}/package.json`);
+    return pkgJson.dependencies[name] && pkgJson.dependencies[name].includes('github.com');
+  }
 
   function rmDir (dirPath) {
     console.log('[zelda] rm -rf ' + dirPath)
