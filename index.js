@@ -86,6 +86,7 @@ function zelda (rootPath, opts) {
 
     if (opts.yarn) args.push('--ignore-engines')
     if (opts.yarn) args.push('--ignore-optional')
+    if (opts.yarn) args.push('--no-lockfile')
 
     if (!opts['dry-run']) {
       cp.spawnSync(PKG_MGR_EXEC, args, {
